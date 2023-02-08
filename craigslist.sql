@@ -13,7 +13,7 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY NOT NULL,
     username TEXT NOT NULL,
     PASSWORD TEXT NOT NULL,
-    region_pref TEXT,
+    region_pref TEXT REFERENCES region (id),
 );
 
 CREATE TABLE category (
@@ -25,9 +25,9 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     body TEXT NOT NULL,
-    user_id INT NOT NULL,
-    region_id INT NOT NULL,
-    cat_id INT NOT NULL
+    user_id INT NOT NULL REFERENCES users (id),
+    region_id INT NOT NULL REFERENCES region (id),
+    cat_id INT NOT NULL REFERENCES category (id)
 );
 
 INSERT INTO

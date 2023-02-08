@@ -4,9 +4,7 @@ DROP DATABASE IF EXISTS med_center;
 
 CREATE DATABASE med_center;
 
-\ c med_center;
-
-CREATE TABLE doctors (
+\ c med_center CREATE TABLE doctors (
     id SERIAL PRIMARY KEY,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
@@ -19,7 +17,7 @@ CREATE TABLE patients (
     last_name TEXT NOT NULL,
     gender TEXT NOT NULL,
     date_of_birth DATE NOT NULL,
-    ins_id INT,
+    ins_id INT REFERENCES insurance (id),
     address TEXT NOT NULL
 );
 
@@ -37,9 +35,9 @@ CREATE TABLE insurance (
 
 CREATE TABLE diagnosis (
     id SERIAL PRIMARY KEY,
-    dr_id INT NOT NULL,
-    patient_id INT NOT NULL,
-    illness_id INT NOT NULL,
+    dr_id INT NOT NULL REFERENCES doctors (id),
+    patient_id INT NOT NULL REFERENCES patients (id),
+    illness_id INT NOT NULL REFERENCES illnesses (id),
     date_of_diag DATE NOT NULL,
 );
 
